@@ -96,7 +96,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <?php endif; ?>
         
         <form method="POST" action="">
-            <!-- Name Fields -->
+
             <div class="form-row">
                 <div class="form-group">
                     <label>First Name</label>
@@ -111,7 +111,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
             </div>
             
-            <!-- Email and Phone -->
             <div class="form-row">
                 <div class="form-group">
                     <label>Email Address</label>
@@ -126,7 +125,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
             </div>
             
-            <!-- Department and Position -->
+    
             <div class="form-row">
                 <div class="form-group">
                     <label>Department</label>
@@ -148,7 +147,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
             </div>
             
-            <!-- Role Selection -->
+            
             <div class="role-selection">
                 <label>Select Role</label>
                 <div class="role-options">
@@ -174,7 +173,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
             </div>
             
-            <!-- Password Fields -->
+           
             <div class="form-row">
                 <div class="form-group">
                     <label>Password</label>

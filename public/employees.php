@@ -9,7 +9,7 @@ requireAdmin();
 require_once '../config/db.php';
 
 // Set page title
-$pageTitle = 'Manage Employees - Employee Attendance System';
+$pageTitle = "Manage Employees";
 
 // Include header
 include '../includes/header.php';
@@ -24,21 +24,21 @@ try {
 ?>
 
 <div class="card">
-    <h2>👥 Manage Employees</h2>
+    <h2>Manage Employees</h2>
     
     <?php if(isset($_SESSION['success'])): ?>
-        <div class="alert alert-success"><?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?></div>
+        <div><?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?></div>
     <?php endif; ?>
     
     <?php if(isset($_SESSION['error'])): ?>
-        <div class="alert alert-error"><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></div>
+        <div class><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></div>
     <?php endif; ?>
     
     <?php if(isset($error)): ?>
-        <div class="alert alert-error"><?php echo htmlspecialchars($error); ?></div>
+        <div><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
     
-    <p><a href="add_employee.php" class="btn">➕ Add New Employee</a></p>
+    <p><a href="add_employee.php" class="btn">Add New Employee</a></p>
     
     <?php if(count($employees) > 0): ?>
         <table>

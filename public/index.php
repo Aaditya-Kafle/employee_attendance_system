@@ -85,22 +85,22 @@ try {
 </div>
 
 <div class="card">
-    <h2>🎯 Quick Actions</h2>
+    <h2>Actions</h2>
     <div>
         <?php if($isAdmin): ?>
             <!-- Admin Quick Actions - Full access -->
-            <a href="employees.php" class="btn">👥 Manage Employees</a>
-            <a href="add_employee.php" class="btn">➕ Add New Employee</a>
-            <a href="attendance.php" class="btn">📋 View All Attendance</a>
-            <a href="mark_attendance.php" class="btn btn-success">✓ Mark Attendance</a>
-            <a href="leave_requests.php" class="btn btn-warning">📝 Manage Leave Requests</a>
-            <a href="search.php" class="btn">🔍 Search Records</a>
+            <a href="employees.php" class="btn"> Manage Employees</a>
+            <a href="add_employee.php" class="btn">Add New Employee</a>
+            <a href="attendance.php" class="btn"> View All Attendance</a>
+            <a href="mark_attendance.php" class="btn btn-success"> Mark Attendance</a>
+            <a href="leave_requests.php" class="btn btn-warning">Manage Leave Requests</a>
+            <a href="search.php" class="btn"> Search Records</a>
         <?php else: ?>
             <!-- Employee Quick Actions - Limited access -->
             <a href="mark_attendance.php" class="btn btn-success">✓ Mark My Attendance</a>
-            <a href="apply_leave.php" class="btn btn-warning">📝 Apply for Leave</a>
-            <a href="my_attendance.php" class="btn">📋 View My Attendance</a>
-            <a href="my_leaves.php" class="btn">📄 View My Leaves</a>
+            <a href="apply_leave.php" class="btn btn-warning">Apply for Leave</a>
+            <a href="my_attendance.php" class="btn">View My Attendance</a>
+            <a href="my_leaves.php" class="btn">View My Leaves</a>
         <?php endif; ?>
     </div>
 </div>
@@ -110,7 +110,7 @@ try {
     <div>
         <!-- Recent Employees Table -->
         <div class="card">
-            <h2>👥 Recent Employees</h2>
+            <h2>Recent Employees</h2>
             <?php
             try {
                 // Fetch last 5 employees ordered by creation date
@@ -218,7 +218,7 @@ try {
     <div>
         <!-- My Recent Attendance -->
         <div class="card">
-            <h2>📅 My Recent Attendance</h2>
+            <h2>My Recent Attendance</h2>
             <?php
             try {
                 // Fetch employee's last 5 attendance records
@@ -275,7 +275,7 @@ try {
         
         <!-- My Leave Requests -->
         <div class="card">
-            <h2>📋 My Leave Requests</h2>
+            <h2>My Leave Requests</h2>
             <?php
             try {
                 // Fetch employee's last 5 leave requests
