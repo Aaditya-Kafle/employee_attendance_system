@@ -9,10 +9,11 @@ requireAdmin();
 require_once '../config/db.php';
 
 // Set page title
-$pageTitle = 'Edit Employee - Employee Attendance System';
+$pageTitle = 'Edit Employee';
 
 // Get employee ID from URL
-$employee_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$employee_id = (int) ($_GET['id'] ?? 0);
+
 
 if($employee_id <= 0){
     $_SESSION['error'] = "Invalid employee ID.";
@@ -42,6 +43,13 @@ try {
 
 // Handle form submission
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     if (
+        empty($_POST['csrf']) ||
+        !hash_equals($_SESSION['csrf'], $_POST['csrf'])
+    ) {
+        http_response_code(403);
+        exit('Invalid CSRF token');
+    }
     // Get form data
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
@@ -121,7 +129,8 @@ include '../includes/header.php';
         <div class="alert alert-error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
     
-    <form method="POST" action="">
+    <form method="POST">
+        <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
         <div class="form-group">
             <label>First Name *</label>
             <input type="text" name="first_name" required value="<?php echo htmlspecialchars($first_name); ?>">

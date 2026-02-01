@@ -14,6 +14,13 @@ $success = "";
 
 // Handle form submission
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     if (
+        empty($_POST['csrf']) ||
+        !hash_equals($_SESSION['csrf'], $_POST['csrf'])
+    ) {
+        http_response_code(403);
+        exit('Invalid CSRF token');
+    }
     $employee_id = $_SESSION['employee_id'];
     $leave_type = $_POST['leave_type'];
     $start_date = $_POST['start_date'];
@@ -71,7 +78,8 @@ include '../includes/header.php';
         <div class="alert alert-success"><?php echo htmlspecialchars($success); ?></div>
     <?php endif; ?>
     
-    <form method="POST" action="">
+    <form method="POST">
+        <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
         <div class="form-group">
             <label>Leave Type *</label>
             <select name="leave_type" required>

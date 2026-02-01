@@ -9,6 +9,13 @@ $pageTitle = 'Mark Attendance';
 // Initialize variables
 $error = "";
 $success = "";
+$date = '';
+$status = '';
+$check_in_time = '';
+$check_out_time = '';
+$notes = '';
+$employee_id = '';
+
 
 // For admins, they can mark attendance for any employee
 // For employees, they can only mark their own attendance
@@ -16,6 +23,13 @@ $isAdmin = isAdmin();
 
 // Handle form submission
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if (
+        empty($_POST['csrf']) ||
+        !hash_equals($_SESSION['csrf'], $_POST['csrf'])
+    ) {
+        http_response_code(403);
+        exit('Invalid CSRF token');
+    }
     $employee_id = $isAdmin ? $_POST['employee_id'] : $_SESSION['employee_id'];
     $date = $_POST['date'];
     $status = $_POST['status'];
@@ -91,6 +105,7 @@ include '../includes/header.php';
     <?php endif; ?>
     
     <form method="POST">
+        <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
         <?php if($isAdmin): ?>
         <div class="form-group">
             <label>Select Employee *</label>

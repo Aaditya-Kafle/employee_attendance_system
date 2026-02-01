@@ -33,7 +33,10 @@ include '../includes/header.php';
     
     <!-- Search fields will appear here based on search type -->
     <div id="search_fields"></div>
-    
+    <!-- Loading indicator -->
+     <div id="loading" style="display:none; margin: 10px 0; font-weight: bold;">
+       Loading...
+    </div>
     <!-- Results will appear here -->
     <div id="search_results"></div>
 </div>

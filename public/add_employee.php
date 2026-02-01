@@ -13,10 +13,17 @@ $pageTitle = 'Add Employee - Employee Attendance System';
 
 // Initialize variables
 $error = "";
-$success = "";
+
 
 // Handle form submission
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if (
+        empty($_POST['csrf']) ||
+        !hash_equals($_SESSION['csrf'], $_POST['csrf'])
+    ) {
+        http_response_code(403);
+        exit('Invalid CSRF token');
+    }
     // Get form data
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
@@ -39,7 +46,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
     else {
         try {
-            // Check if email already exists
+            // Check if email already exists 
             $stmt = $pdo->prepare("SELECT employee_id FROM employees WHERE email = ?");
             $stmt->execute([$email]);
             
@@ -87,25 +94,26 @@ include '../includes/header.php';
         <div class="alert alert-error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
     
-    <form method="POST" action="">
+    <form method="POST">
+        <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
         <div class="form-group">
             <label>First Name *</label>
-            <input type="text" name="first_name" required value="<?php echo isset($first_name) ? htmlspecialchars($first_name) : ''; ?>">
+            <input type="text" name="first_name" required value="<?=htmlspecialchars($first_name ?? '') ?>">
         </div>
         
         <div class="form-group">
             <label>Last Name *</label>
-            <input type="text" name="last_name" required value="<?php echo isset($last_name) ? htmlspecialchars($last_name) : ''; ?>">
+            <input type="text" name="last_name" required value="<?=htmlspecialchars($last_name ?? '') ?>">
         </div>
         
         <div class="form-group">
             <label>Email *</label>
-            <input type="email" name="email" required value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>">
+            <input type="email" name="email" required value="<?=htmlspecialchars($email ?? '') ?>">
         </div>
         
         <div class="form-group">
             <label>Phone</label>
-            <input type="text" name="phone" value="<?php echo isset($phone) ? htmlspecialchars($phone) : ''; ?>">
+            <input type="text" name="phone" value="<?=htmlspecialchars($phone ?? '')?>">
         </div>
         
         <div class="form-group">
@@ -117,13 +125,12 @@ include '../includes/header.php';
                 <option value="Finance">Finance</option>
                 <option value="Marketing">Marketing</option>
                 <option value="Sales">Sales</option>
-                <option value="Operations">Operations</option>
             </select>
         </div>
         
         <div class="form-group">
             <label>Position *</label>
-            <input type="text" name="position" required value="<?php echo isset($position) ? htmlspecialchars($position) : ''; ?>">
+            <input type="text" name="position" required value="<?=htmlspecialchars($position ?? '')?>">
         </div>
         
         <div class="form-group">

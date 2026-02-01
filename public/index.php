@@ -28,13 +28,7 @@ try {
         $stmt = $pdo->query("SELECT COUNT(*) as total FROM leave_requests WHERE status = 'Pending'");
         $pendingLeaves = $stmt->fetch()['total'];
         
-        // Get total employees
-        $stmt = $pdo->query("SELECT COUNT(*) as total FROM employees WHERE status = 'Active'");
-        $totalEmployees = $stmt->fetch()['total'];
-        
     } else {
-        // Employee sees only their own statistics
-        
         // Get employee's attendance count
         $stmt = $pdo->prepare("SELECT COUNT(*) as total FROM attendance WHERE employee_id = ?");
         $stmt->execute([$currentEmployeeId]);
@@ -58,22 +52,20 @@ try {
 ?>
 
 <div class="card">
-    <h2>📊 Dashboard</h2>
+    <h2>Dashboard</h2>
     
     <?php if(isset($error)): ?>
         <!-- Display error message if there was a database error -->
         <div class="alert alert-error"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
-    
-    <?php if($isAdmin): ?>
-        <!-- Admin Dashboard - Show all statistics -->
-        <h3>Admin Overview</h3>
-        <div>
-            <p><strong>Total Employees:</strong> <?php echo $totalEmployees; ?></p>
-            <p><strong>Total Attendance Records:</strong> <?php echo $totalAttendance; ?></p>
-            <p><strong>Pending Leave Requests:</strong> <?php echo $pendingLeaves; ?></p>
-        </div>
-    <?php else: ?>
+   <?php if($isAdmin): ?>
+    <!-- Admin Dashboard - Show all statistics -->
+    <h3>Admin Overview</h3>
+    <div>
+        <p><strong>Total Attendance Records:</strong> <?php echo isset($totalAttendance) ? $totalAttendance : 0; ?></p>
+        <p><strong>Pending Leave Requests:</strong> <?php echo isset($pendingLeaves) ? $pendingLeaves : 0; ?></p>
+    </div>
+<?php else: ?>
         <!-- < Employee Dashboard - Show only their statistics --> 
         <h3>My Overview</h3>
         <div>
@@ -88,7 +80,7 @@ try {
     <h2>Actions</h2>
     <div>
         <?php if($isAdmin): ?>
-            <!-- Admin Quick Actions - Full access -->
+            <!-- Admin Actions -->
             <a href="employees.php" class="btn"> Manage Employees</a>
             <a href="add_employee.php" class="btn">Add New Employee</a>
             <a href="attendance.php" class="btn"> View All Attendance</a>
@@ -106,59 +98,10 @@ try {
 </div>
 
 <?php if($isAdmin): ?>
-    <!-- Admin Dashboard - Show recent employees and pending leaves -->
+    <!-- Admin Dashboard -->
     <div>
-        <!-- Recent Employees Table -->
         <div class="card">
-            <h2>Recent Employees</h2>
-            <?php
-            try {
-                // Fetch last 5 employees ordered by creation date
-                $stmt = $pdo->query("SELECT employee_id, first_name, last_name, department, position, role FROM employees ORDER BY created_at DESC LIMIT 5");
-                $recentEmployees = $stmt->fetchAll();
-                
-                // Check if any employees found
-                if(count($recentEmployees) > 0) {
-                    // Display table with employee data
-                    echo '<table>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Department</th>
-                                    <th>Position</th>
-                                    <th>Role</th>
-                                </tr>
-                            </thead>
-                            <tbody>';
-                    
-                    // Loop through each employee and display in table row
-                    foreach($recentEmployees as $emp) {
-                        echo '<tr>
-                                <td>' . htmlspecialchars($emp['first_name'] . ' ' . $emp['last_name']) . '</td>
-                                <td>' . htmlspecialchars($emp['department']) . '</td>
-                                <td>' . htmlspecialchars($emp['position']) . '</td>
-                                <td><span class="badge badge-info">' . htmlspecialchars($emp['role']) . '</span></td>
-                              </tr>';
-                    }
-                    
-                    echo '</tbody></table>';
-                    
-                    // Link to view all employees
-                    echo '<p class="text-center mt-2"><a href="employees.php" class="btn btn-small">View All Employees</a></p>';
-                } else {
-                    // Display message if no employees found
-                    echo '<p>No employees found.</p>';
-                }
-            } catch(PDOException $e) {
-                // Display error message if query fails
-                echo '<div class="alert alert-error">Error loading employees: ' . htmlspecialchars($e->getMessage()) . '</div>';
-            }
-            ?>
-        </div>
-        
-        <!-- Pending Leave Requests Table -->
-        <div class="card">
-            <h2>📋 Pending Leave Requests</h2>
+            <h2>Pending Leave Requests</h2>
             <?php
             try {
                 // Fetch pending leave requests with employee names using JOIN
@@ -200,7 +143,7 @@ try {
                     echo '</tbody></table>';
                     
                     // Link to view all leave requests
-                    echo '<p class="text-center mt-2"><a href="leave_requests.php" class="btn btn-small">Manage All Requests</a></p>';
+                    echo '<p class="text-center"><a href="leave_requests.php" class="btn btn-small">Manage All Requests</a></p>';
                 } else {
                     // Display message if no pending requests
                     echo '<p>No pending leave requests.</p>';
@@ -263,7 +206,7 @@ try {
                     }
                     
                     echo '</tbody></table>';
-                    echo '<p class="text-center mt-2"><a href="my_attendance.php" class="btn btn-small">View All My Attendance</a></p>';
+                    echo '<p class="text-center"><a href="my_attendance.php" class="btn btn-small">View All My Attendance</a></p>';
                 } else {
                     echo '<p>No attendance records found.</p>';
                 }

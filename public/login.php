@@ -8,6 +8,7 @@ if(isset($_SESSION['employee_id'])){
 }
 
 require_once '../config/db.php';
+require_once '../includes/header.php';
 $error = "";
 $success = "";
 
@@ -18,6 +19,13 @@ if(isset($_SESSION['signup_success'])){
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if (
+        empty($_POST['csrf']) ||
+        !hash_equals($_SESSION['csrf'], $_POST['csrf'])
+    ) {
+        http_response_code(403);
+        exit('Invalid CSRF token');
+    }
     $email = trim($_POST['email']);
     $password = $_POST['password'];
     
@@ -62,7 +70,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 </head>
 <body>
     <div class="login-content">
-        <h1>Employee Attendance System</h1>
         <h2>Login</h2>
         
         <?php if(!empty($success)): ?>
@@ -74,7 +81,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <?php endif; ?>
         
         <div class="form-content">
-            <form method="POST" action="">
+            <form method="POST">
+                <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
                 <label>Email:</label>
                 <input type="email" name="email" required>
                 
