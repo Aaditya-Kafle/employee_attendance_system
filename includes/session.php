@@ -51,36 +51,4 @@ if (!isset($_SESSION['created'])) {
     $_SESSION['created'] = time();
 }
 
-// Helper function to check if user is logged in
-function isLoggedIn() {
-    return isset($_SESSION['employee_id']);
-}
-
-// Helper function to get current user ID
-function getCurrentUserId() {
-    return $_SESSION['employee_id'] ?? null;
-}
-
-// Helper function to get current user name
-function getCurrentUserName() {
-    if (isset($_SESSION['first_name']) && isset($_SESSION['last_name'])) {
-        return $_SESSION['first_name'] . ' ' . $_SESSION['last_name'];
-    }
-    return null;
-}
-
-// Helper function to get current user role
-function getCurrentUserRole() {
-    return $_SESSION['role'] ?? null;
-}
-
-// Helper function to check if current user is admin
-function isCurrentUserAdmin() {
-    return isset($_SESSION['role']) && $_SESSION['role'] == 'Admin';
-}
-
-// Helper function to check if current user is employee
-function isCurrentUserEmployee() {
-    return isset($_SESSION['role']) && $_SESSION['role'] == 'Employee';
-}
 ?>

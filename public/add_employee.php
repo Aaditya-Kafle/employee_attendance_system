@@ -1,21 +1,10 @@
 <?php
-// Check authentication
 require_once '../includes/auth_check.php';
-
-// Only admins can access this page
 requireAdmin();
-
-// Include database connection
 require_once '../config/db.php';
-
-// Set page title
-$pageTitle = 'Add Employee - Employee Attendance System';
-
-// Initialize variables
+$pageTitle = 'Add Employee';
 $error = "";
 
-
-// Handle form submission
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if (
         empty($_POST['csrf']) ||
@@ -83,7 +72,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 }
 
-// Include header
 include '../includes/header.php';
 ?>
 
@@ -91,7 +79,7 @@ include '../includes/header.php';
     <h2>Add New Employee</h2>
     
     <?php if(!empty($error)): ?>
-        <div class="alert alert-error"><?php echo htmlspecialchars($error); ?></div>
+        <div class="error-msg"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
     
     <form method="POST">
@@ -99,24 +87,21 @@ include '../includes/header.php';
         <div class="form-group">
             <label>First Name *</label>
             <input type="text" name="first_name" required value="<?=htmlspecialchars($first_name ?? '') ?>">
-        </div>
-        
-        <div class="form-group">
             <label>Last Name *</label>
             <input type="text" name="last_name" required value="<?=htmlspecialchars($last_name ?? '') ?>">
-        </div>
+       
+    
         
-        <div class="form-group">
             <label>Email *</label>
             <input type="email" name="email" required value="<?=htmlspecialchars($email ?? '') ?>">
-        </div>
+       
         
-        <div class="form-group">
+        
             <label>Phone</label>
             <input type="text" name="phone" value="<?=htmlspecialchars($phone ?? '')?>">
-        </div>
         
-        <div class="form-group">
+        
+        
             <label>Department *</label>
             <select name="department" required>
                 <option value="">Select Department</option>
@@ -126,29 +111,28 @@ include '../includes/header.php';
                 <option value="Marketing">Marketing</option>
                 <option value="Sales">Sales</option>
             </select>
-        </div>
-        
-        <div class="form-group">
+    
+      
             <label>Position *</label>
             <input type="text" name="position" required value="<?=htmlspecialchars($position ?? '')?>">
-        </div>
         
-        <div class="form-group">
+        
+        
             <label>Role *</label>
             <select name="role" required>
                 <option value="">Select Role</option>
                 <option value="Employee">Employee</option>
                 <option value="Admin">Admin</option>
             </select>
-        </div>
+      
         
-        <div class="form-group">
+       
             <label>Password *</label>
             <input type="password" name="password" required minlength="6">
-        </div>
         
         <button type="submit" class="btn">Add Employee</button>
-        <a href="employees.php" class="btn btn-danger">Cancel</a>
+        <a href="index.php" class="btn">Cancel</a>
+    </div>
     </form>
 </div>
 

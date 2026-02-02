@@ -1,18 +1,13 @@
 <?php
-// Check authentication
 require_once '../includes/auth_check.php';
-
-// Include database connection
 require_once '../config/db.php';
 
-// Set page title
 $pageTitle = 'Search';
 
 // Check if user is admin
 $isAdmin = isAdmin();
 $currentEmployeeId = $_SESSION['employee_id'];
 
-// Include header
 include '../includes/header.php';
 ?>
 

@@ -66,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Employee Attendance System</title>
+    <title>Login</title>
 </head>
 <body>
     <div class="login-content">
@@ -82,14 +82,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
         <div class="form-content">
             <form method="POST">
+                <div class="form-group">
                 <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
                 <label>Email:</label>
                 <input type="email" name="email" required>
                 
                 <label>Password:</label>
                 <input type="password" name="password" required>
-                
-                <button type="submit">Login</button>
+                <br>
+                <br>
+                <button type="submit" class="btn">Login</button>
+                </div>
             </form>
         </div>
         

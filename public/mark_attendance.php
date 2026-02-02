@@ -3,10 +3,10 @@ require_once '../includes/auth_check.php';
 
 require_once '../config/db.php';
 
-// Set page title
+
 $pageTitle = 'Mark Attendance';
 
-// Initialize variables
+
 $error = "";
 $success = "";
 $date = '';
@@ -97,11 +97,11 @@ include '../includes/header.php';
     <h2>Mark Attendance</h2>
     
     <?php if(!empty($error)): ?>
-        <div class="alert alert-error"><?php echo htmlspecialchars($error); ?></div>
+        <div class="error-msg"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
     
     <?php if(!empty($success)): ?>
-        <div class="alert alert-success"><?php echo htmlspecialchars($success); ?></div>
+        <div class="success-msg"><?php echo htmlspecialchars($success); ?></div>
     <?php endif; ?>
     
     <form method="POST">
@@ -123,9 +123,6 @@ include '../includes/header.php';
         <div class="form-group">
             <label>Date *</label>
             <input type="date" name="date" required value="<?=htmlspecialchars($date) ?>">
-        </div>
-        
-        <div class="form-group">
             <label>Status *</label>
             <select name="status" required>
                 <option value="">Select Status</option>
@@ -134,25 +131,16 @@ include '../includes/header.php';
                 <option value="Late">Late</option>
                 <option value="Half-day">Half-day</option>
             </select>
-        </div>
-        
-        <div class="form-group">
             <label>Check In Time</label>
             <input type="time" name="check_in_time" value="<?=htmlspecialchars($check_in_time)?>">
-        </div>
         
-        <div class="form-group">
             <label>Check Out Time</label>
             <input type="time" name="check_out_time" value="<?=htmlspecialchars($check_out_time)?>">
-        </div>
         
-        <div class="form-group">
             <label>Notes</label>
             <textarea name="notes" rows="3"><?=htmlspecialchars($notes)?></textarea>
-        </div>
-        
-        <button type="submit" class="btn btn-success">Mark Attendance</button>
-        <a href="index.php" class="btn">Back to Dashboard</a>
+        <button type="submit" class="btn">Mark Attendance</button>
+    </div>
     </form>
 </div>
 

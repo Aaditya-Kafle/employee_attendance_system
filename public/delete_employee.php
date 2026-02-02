@@ -1,14 +1,10 @@
 <?php
-// Check authentication
 require_once '../includes/auth_check.php';
 
-// Only admins can access this page
 requireAdmin();
 
-// Include database connection
 require_once '../config/db.php';
 
-// Get employee ID from URL
 $employee_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if($employee_id <= 0){

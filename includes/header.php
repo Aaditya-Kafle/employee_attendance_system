@@ -20,10 +20,10 @@ if (empty($_SESSION['csrf'])) {
 	 <header>
         <div class="header-content">
             <div>
-            <a href="index.php" class="btn btn-small">Back to Dashboard</a>
+            <a href="index.php" class="btn">Back to Dashboard</a>
     </div>
             <h1> Employee Attendance & Leave Management</h1>
-            <a href="logout.php" class="btn btn-small">Logout</a>
+            <a href="logout.php" class="btn">Logout</a>
         </div>
     </header>
 

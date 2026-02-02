@@ -3,11 +3,6 @@
 	<p>Employee Attendance & Leave Management. All rights reserved</p>
 </footer>
   <script>
-        // Confirmation for delete actions
-        function confirmDelete(message) {
-            return confirm(message || 'Are you sure you want to delete this record? This action cannot be undone.');
-        }
-        
         // Auto-hide alerts after 5 seconds
         document.addEventListener('DOMContentLoaded', function() {
             const alerts = document.querySelectorAll('.alert');

@@ -88,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign Up - Employee Attendance System</title>
+    <title>Sign Up</title>
 </head>
 <body>
     <div class="signup-content">
@@ -108,13 +108,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <div class="form-group">
                     <label>First Name</label>
                     <input type="text" name="first_name" required 
-                           value="<?php echo isset($first_name) ? htmlspecialchars($first_name) : ''; ?>">
+                           value="<?=htmlspecialchars($first_name ?? '')?>">
                 </div>
                 
                 <div class="form-group">
                     <label>Last Name</label>
                     <input type="text" name="last_name" required 
-                           value="<?php echo isset($last_name) ? htmlspecialchars($last_name) : ''; ?>">
+                           value="<?=htmlspecialchars($last_name ?? '')?>">
                 </div>
             </div>
             
@@ -122,13 +122,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <div class="form-group">
                     <label>Email Address</label>
                     <input type="email" name="email" required 
-                           value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>">
+                           value="<?=htmlspecialchars($email ?? '')?>">
                 </div>
                 
                 <div class="form-group">
                     <label>Phone Number</label>
                     <input type="text" name="phone" 
-                           value="<?php echo isset($phone) ? htmlspecialchars($phone) : ''; ?>">
+                           value="<?=htmlspecialchars($phone ?? '')?>">
                 </div>
             </div>
             
@@ -143,7 +143,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <option value="Finance" <?php echo (isset($department) && $department == 'Finance') ? 'selected' : ''; ?>>Finance</option>
                         <option value="Marketing" <?php echo (isset($department) && $department == 'Marketing') ? 'selected' : ''; ?>>Marketing</option>
                         <option value="Sales" <?php echo (isset($department) && $department == 'Sales') ? 'selected' : ''; ?>>Sales</option>
-                        <option value="Operations" <?php echo (isset($department) && $department == 'Administration') ? 'selected' : ''; ?>>Administration</option>
+                        <option value="Operations" <?php echo (isset($department) && $department == 'Operations') ? 'selected' : ''; ?>>Operations</option>
                     </select>
                 </div>
                 
@@ -193,7 +193,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 </div>
             </div>
             
-            <button type="submit">Create Account</button>
+            <button type="submit" class="btn">Create Account</button>
         </form>
         
         <div class="login-link">

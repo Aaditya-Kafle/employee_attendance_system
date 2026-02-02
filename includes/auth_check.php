@@ -20,12 +20,9 @@ function isAdmin() {
 function isEmployee() {
     return isset($_SESSION['role']) && $_SESSION['role'] == 'Employee';
 }
-
-// Function to require admin access
 function requireAdmin() {
-    if(!isAdmin()) {
-        // Not admin - redirect to dashboard with error
-        $_SESSION['error'] = 'Access denied. Admin privileges required.';
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
+        $_SESSION['error'] = 'Access denied.';
         header('Location: index.php');
         exit;
     }
