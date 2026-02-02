@@ -1,9 +1,9 @@
 <?php
 
 $host = 'localhost';
-$database   = 'employee_system';
-$username = 'root';
-$password = '';
+$database   = 'np03cs4a240225';
+$username = 'np03cs4a240225';
+$password = 'MdNoEF3WKq';
 
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
