@@ -40,7 +40,7 @@ include '../includes/header.php';
     // Pass PHP variables to JavaScript
     const isUserAdmin = <?= $isAdmin ? 'true' : 'false'; ?>;
 </script>
-
+<a href="index.php" class="btn">Back to Dashboard</a>
 
 <script src="../assets/js/search.js"></script>
 
