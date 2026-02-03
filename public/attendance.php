@@ -87,5 +87,5 @@ include '../includes/header.php';
         <p>No attendance records found.</p>
     <?php endif; ?>
 </div>
-
+ <a href="index.php" class="btn">Back to Dashboard</a>
 <?php include '../includes/footer.php'; ?>

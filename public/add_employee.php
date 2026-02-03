@@ -110,10 +110,10 @@ include '../includes/header.php';
                 <option value="Finance">Finance</option>
                 <option value="Marketing">Marketing</option>
                 <option value="Sales">Sales</option>
-            </select>
+             </select>
+            <label>Position *</label>          
     
-      
-            <label>Position *</label>
+    
             <input type="text" name="position" required value="<?=htmlspecialchars($position ?? '')?>">
         
         

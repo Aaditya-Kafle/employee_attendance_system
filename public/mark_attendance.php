@@ -140,6 +140,7 @@ include '../includes/header.php';
             <label>Notes</label>
             <textarea name="notes" rows="3"><?=htmlspecialchars($notes)?></textarea>
         <button type="submit" class="btn">Mark Attendance</button>
+         <a href="index.php" class="btn">Back to Dashboard</a>
     </div>
     </form>
 </div>

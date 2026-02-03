@@ -17,15 +17,17 @@ if (empty($_SESSION['csrf'])) {
 
 </head>
 <body>
-	 <header>
-        <div class="header-content">
-            <div>
-            <a href="index.php" class="btn">Back to Dashboard</a>
-    </div>
-            <h1> Employee Attendance & Leave Management</h1>
+	<header>
+    <div class="header-content">
+        <h1>Employee Attendance & Leave Management</h1>
+
+        <?php if (isset($_SESSION['employee_id'])): ?>
+        <div class="logout_btn">
             <a href="logout.php" class="btn">Logout</a>
         </div>
-    </header>
+        <?php endif; ?>
+    </div>
+</header>
 
 <div class="container">
 

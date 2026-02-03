@@ -154,6 +154,7 @@ include '../includes/header.php';
 
             <button type="submit" class="btn">Update Employee</button>
             <a href="employees.php" class="btn">Cancel</a>
+             <a href="index.php" class="btn">Back to Dashboard</a>
         </div>
     </form>
 </div>
